@@ -42,7 +42,7 @@ Extract the active nav IDs.
 
 {%- if page.language == "en" -%}
   {%- capture baseurl_i18n -%}{{ site.baseurl }}{%- endcapture -%}
-{%- else if page.language == "zh" -%}
+{%- else if page.language != "en" -%}
   {%- capture baseurl_i18n -%}{{ site.baseurl }}/{{ page.language }}{%- endcapture -%}
 {%- endif -%}
 
@@ -121,7 +121,7 @@ level is determined by 'nav-pos'.
 <li><a href={{ collapse_target }}>{{ title }}{{ expand }}</a><div class="collapse{% if active %} in{% endif %}" id="collapse-{{ i }}"><ul>
         {%- if this.nav-show_overview %}
 <li><a href={{ overview_target }}>
-            {%- if page.is_default_language %}Overview{% else %}概览{% endif %}</a></li>
+            {%- if page.is_default_language -%}Overview{%- elsif page.language == "zh" -%}概览{%- elsif page.language == "jp" -%}概要{%- endif -%}</a></li>
         {%- endif -%}
         {%- assign elements = elements | push: children -%}
         {%- assign elementsPosStack = elementsPosStack | push: elementsPos -%}
@@ -158,8 +158,10 @@ level is determined by 'nav-pos'.
     <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
       {%- if page.is_default_language -%}
         Pick Docs Version
-      {%- else -%}
+      {%- else if page.language == "zh" -%}
         选择文档版本
+      {%- else if page.language == "jp" -%}
+        文書のバージョンを選択
       {%- endif -%}
     <span class="caret"></span></button>
     <ul class="dropdown-menu">
@@ -176,8 +178,13 @@ level is determined by 'nav-pos'.
     <a href="{{ site.baseurl }}/zh{{ page.url }}">
       <button type="submit" class="btn btn-default">中文版</button>
     </a>
+    <!-- link to the Japanese home page when current is blog page -->
+    <a href="{{ site.baseurl }}/jp{{ page.url }}">
+      <button type="submit" class="btn btn-default">日本語版</button>
+    </a>
   {%- else -%}
-    <a href="{{ site.baseurl }}{{ page.url | remove_first: 'zh/' }}">
+    {%- capture language_prefix -%}{{ page.language }}/{%- endcapture -%}
+    <a href="{{ site.baseurl }}{{ page.url | remove_first: language_prefix }}">
       <button type="submit" class="btn btn-default">English</button>
     </a>
   {%- endif %}

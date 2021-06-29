@@ -53,7 +53,7 @@ JEKYLL_CMD="build"
 
 JEKYLL_CONFIG=""
 
-DOC_LANGUAGES="en zh"
+DOC_LANGUAGES="en zh jp"
 
 # if -p flag is provided, serve site on localhost
 # -i is like -p, but incremental (only rebuilds the modified file)

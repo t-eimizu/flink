@@ -16,11 +16,13 @@
 # under the License
 
 exclude:
-  - "*.zh.md"
-  - "*.jp.md"
+  - "*.md"
   - "build_docs.sh"
   - "check_links.sh"
   - "content"
   - "content_en"
   - "content_zh"
   - "content_jp"
+
+include:
+  - "*.jp.md"

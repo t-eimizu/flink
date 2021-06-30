@@ -101,3 +101,8 @@ pygmentsUseClasses = true
   languageName = '中文版'
   contentDir = 'content.zh'
   weight = 2
+
+[languages.jp]
+  languageName = '日本語版'
+  contentDir = 'content.jp'
+  weight = 2
